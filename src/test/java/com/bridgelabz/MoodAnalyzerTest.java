@@ -27,7 +27,7 @@ public class MoodAnalyzerTest {
     }
 
     @Test
-    public void whenEmptyMessage_shouldReturnException() {
+    public void whenEmptyMessage_shouldReturnEmptyException() {
         try {
             MoodAnalyzer moodAnalyzer = new MoodAnalyzer("");
         } catch (MoodAnalysisException ex) {
