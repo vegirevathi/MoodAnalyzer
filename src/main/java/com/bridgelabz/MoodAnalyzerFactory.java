@@ -28,4 +28,28 @@ public class MoodAnalyzerFactory {
         }
         return null;
     }
+
+    public static MoodAnalyzer createMoodAnalyzer() {
+        try {
+            Class<?> moodAnalyzerClass = Class.forName("com.bridgelabz.MoodAnalyzer");
+            try {
+                Constructor<?> moodConstructor = moodAnalyzerClass.getConstructor();
+                try {
+                    Object moodObj = moodConstructor.newInstance();
+                    return (MoodAnalyzer) moodObj;
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
