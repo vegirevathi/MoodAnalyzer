@@ -30,4 +30,16 @@ public class MoodAnalyzerFactory {
         }
         return null;
     }
+
+    public static Object invokeMethod(Object myobject, String methodName) throws MoodAnalysisException {
+        try {
+            return myobject.getClass().getMethod(methodName).invoke(myobject);
+        }catch (NoSuchMethodException e){
+            throw new MoodAnalysisException("No such Method",MoodAnalysisException.ExceptionType.NO_SUCH_METHOD);
+        }
+        catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
