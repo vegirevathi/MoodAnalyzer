@@ -61,7 +61,7 @@ public class MoodAnalyzerTest {
 
     @Test
     public void givenMoodAnalyzerClass_whenProper_shouldReturnObject() {
-        MoodAnalyzer moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzer("I am in a Happy Mood");
+        MoodAnalyzer moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer("I am in a Happy Mood");
         try {
             String mood = moodAnalyzer.analyzeMood();
             Assert.assertEquals("HAPPY", mood);
@@ -73,7 +73,7 @@ public class MoodAnalyzerTest {
     @Test
     public void givenMoodAnalyzerClass_whenNotProper_shouldReturnObject() {
         try {
-            MoodAnalyzer moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzer("I am in Happy Mood");
+            MoodAnalyzer moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer("I am in Happy Mood");
         } catch (MoodAnalysisException e) {
             Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, e.exceptionType);
         }
@@ -82,7 +82,7 @@ public class MoodAnalyzerTest {
     @Test
     public void givenMoodAnalyzerConstructor_whenNotProper_shouldReturnObject() {
         try {
-            MoodAnalyzer moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzer("I am in Happy Mood");
+            MoodAnalyzer moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer("I am in Happy Mood");
         } catch (MoodAnalysisException e) {
             Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, e.exceptionType);
         }
@@ -90,7 +90,7 @@ public class MoodAnalyzerTest {
 
     @Test
     public void givenMoodAnalyzerClass_NoParameters_whenProper_shouldReturnObject() {
-        MoodAnalyzer moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzer();
+        MoodAnalyzer moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer();
         try {
             String mood = moodAnalyzer.analyzeMood();
             Assert.assertEquals("HAPPY", mood);
@@ -102,7 +102,7 @@ public class MoodAnalyzerTest {
     @Test
     public void givenMoodAnalyzerClass_NoParameters_whenNotProper_shouldReturnObject() {
         try {
-            MoodAnalyzer moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzer();
+            MoodAnalyzer moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer();
         } catch (MoodAnalysisException e) {
             Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, e.exceptionType);
         }
@@ -111,7 +111,7 @@ public class MoodAnalyzerTest {
     @Test
     public void givenMoodAnalyzerConstructor_NoParameters_whenNotProper_shouldReturnObject() {
         try {
-            MoodAnalyzer moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzer();
+            MoodAnalyzer moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer();
         } catch (MoodAnalysisException e) {
             Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, e.exceptionType);
         }
@@ -120,8 +120,8 @@ public class MoodAnalyzerTest {
     @Test
     public void givenMoodAnalyzer_withReflector_shouldReturnHappy() {
         try {
-            Object myObject = MoodAnalyzerFactory.createMoodAnalyzer("I am in Happy Mood");
-            Object mood = MoodAnalyzerFactory.invokeMethod(myObject, "analyzeMood");
+            Object myObject = MoodAnalyzerReflector.createMoodAnalyzer("I am in Happy Mood");
+            Object mood = MoodAnalyzerReflector.invokeMethod(myObject, "analyzeMood");
             Assert.assertEquals("HAPPY",mood);
         } catch (MoodAnalysisException e) {
             e.printStackTrace();
