@@ -8,7 +8,12 @@ public class MoodAnalyzer {
         this.message = message;
     }
 
-    public String analyzeMood() {
+    public String analyzeMood(String message) throws MoodAnalysisException {
+        this.message = message;
+        return analyzeMood();
+    }
+
+    public String analyzeMood() throws MoodAnalysisException{
         try {
             if (message.length()==0)
                 throw new MoodAnalysisException("Enter proper message for empty string",MoodAnalysisException.ExceptionType.ENTERED_EMPTY);
