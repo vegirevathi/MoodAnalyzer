@@ -4,7 +4,7 @@ public class MoodAnalyzer {
 
     private String message;
 
-    public MoodAnalyzer(String message) {
+    public MoodAnalyzer(String message) throws MoodAnalysisException {
         this.message = message;
     }
 
@@ -13,16 +13,16 @@ public class MoodAnalyzer {
         return analyzeMood();
     }
 
-    public String analyzeMood() throws MoodAnalysisException{
+    public String analyzeMood() throws MoodAnalysisException {
         try {
-            if (message.length()==0)
-                throw new MoodAnalysisException("Enter proper message for empty string",MoodAnalysisException.ExceptionType.ENTERED_EMPTY);
+            if (message.length() == 0)
+                throw new MoodAnalysisException("Enter proper message for empty string", MoodAnalysisException.ExceptionType.ENTERED_EMPTY);
             if (message.contains("sad"))
                 return "SAD";
             else
                 return "HAPPY";
         } catch (NullPointerException ex) {
-            throw new MoodAnalysisException("Enter proper message for null",MoodAnalysisException.ExceptionType.ENTERED_NULL);
+            throw new MoodAnalysisException("Enter proper message for null", MoodAnalysisException.ExceptionType.ENTERED_NULL);
         }
     }
 }
