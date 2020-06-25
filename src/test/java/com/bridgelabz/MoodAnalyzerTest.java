@@ -122,7 +122,7 @@ public class MoodAnalyzerTest {
         try {
             Object myObject = MoodAnalyzerReflector.createMoodAnalyzer("I am in Happy Mood");
             Object mood = MoodAnalyzerReflector.invokeMethod(myObject, "analyzeMood");
-            Assert.assertEquals("HAPPY",mood);
+            Assert.assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
             e.printStackTrace();
         }
@@ -133,7 +133,43 @@ public class MoodAnalyzerTest {
         try {
             Object myObject = MoodAnalyzerReflector.createMoodAnalyzer("");
             Object mood = MoodAnalyzerReflector.invokeMethod(myObject, "analyzeMood");
-            Assert.assertEquals("HAPPY",mood);
+            Assert.assertEquals("HAPPY", mood);
+        } catch (MoodAnalysisException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenMoodAnalyzer_changeMood_shouldReturnHappy() {
+        try {
+            Object myObject = MoodAnalyzerReflector.createMoodAnalyzer("");
+            MoodAnalyzerReflector.setFieldValue(myObject, "message", "I am in Happy Mood");
+            Object mood = MoodAnalyzerReflector.invokeMethod(myObject, "analyzeMood");
+            Assert.assertEquals("HAPPY", mood);
+        } catch (MoodAnalysisException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenMoodAnalyzer_changeMood_shouldThrowEXception_whenImproperFieldValue() {
+        try {
+            Object myObject = MoodAnalyzerReflector.createMoodAnalyzer("");
+            MoodAnalyzerReflector.setFieldValue(myObject, "message", "I am in Sad Mood");
+            Object mood = MoodAnalyzerReflector.invokeMethod(myObject, "analyzeMood");
+            Assert.assertEquals("HAPPY", mood);
+        } catch (MoodAnalysisException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenMoodAnalyzer_changeMood_shouldThrowEXception_whenNullFieldValue() {
+        try {
+            Object myObject = MoodAnalyzerReflector.createMoodAnalyzer("");
+            MoodAnalyzerReflector.setFieldValue(myObject, "message", "");
+            Object mood = MoodAnalyzerReflector.invokeMethod(myObject, "analyzeMood");
+            Assert.assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
             e.printStackTrace();
         }
