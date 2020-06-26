@@ -8,6 +8,8 @@ import java.lang.reflect.InvocationTargetException;
 
 public class MoodAnalyzerTest {
 
+    private Object message;
+
     @Test
     public void whenSadMessage_shouldReturnSad() {
         MoodAnalyzer moodAnalyzer = new MoodAnalyzer("this is sad message");
@@ -39,81 +41,104 @@ public class MoodAnalyzerTest {
     }
 
     @Test
-    public void givenMoodAnalyserObject_WhenProper_ShouldReturnObject() {
-        Constructor<?> constructor = null;
+    public void givenMoodAnalyzerClass_whenProper_shouldReturnObject() {
         try {
-            constructor = Class.forName("com.bridgelabz.MoodAnalyzer").getConstructor(String.class);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            constructor.newInstance("I am in a Happy Mood");
+            Class<?> moodAnalyzerClass = Class.forName("com.bridgelabz.MoodAnalyzer");
+            Constructor<?> moodConstructor = moodAnalyzerClass.getConstructor(String.class);
+            Object moodObject = moodConstructor.newInstance(message);
         } catch (InstantiationException e) {
             e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (MoodAnalysisException | ClassNotFoundException | NoSuchMethodException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void givenMoodAnalyzerClass_whenProper_shouldReturnObject() {
-        MoodAnalyzer moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer("I am in a Happy Mood");
-        try {
-            String mood = moodAnalyzer.analyzeMood();
-            Assert.assertEquals("HAPPY", mood);
-        } catch (MoodAnalysisException e) {
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void givenMoodAnalyzerClass_whenNotProper_shouldReturnObject() {
+    public void givenMoodAnalyzerClass_whenNotProper_shouldThrowException() {
         try {
-            MoodAnalyzer moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer("I am in Happy Mood");
-        } catch (MoodAnalysisException e) {
-            Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, e.exceptionType);
+            Class<?> moodAnalyzerClass = Class.forName("com.bridgelabz.MoodAnalyzerWrong");
+            Constructor<?> moodConstructor = moodAnalyzerClass.getConstructor(String.class);
+            Object moodObject = moodConstructor.newInstance(message);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (MoodAnalysisException | ClassNotFoundException | NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
     }
 
     @Test
-    public void givenMoodAnalyzerConstructor_whenNotProper_shouldReturnObject() {
+    public void givenMoodAnalyzerConstructor_whenNotProper_shouldThrowException() {
         try {
-            MoodAnalyzer moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer("I am in Happy Mood");
-        } catch (MoodAnalysisException e) {
-            Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, e.exceptionType);
+            Class<?> moodAnalyzerClass = Class.forName("com.bridgelabz.MoodAnalyzer");
+            Constructor<?> moodConstructor = moodAnalyzerClass.getConstructor(String.class);
+            Object moodObject = moodConstructor.newInstance(message);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (MoodAnalysisException | ClassNotFoundException | NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
     }
 
     @Test
     public void givenMoodAnalyzerClass_NoParameters_whenProper_shouldReturnObject() {
-        MoodAnalyzer moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer();
         try {
-            String mood = moodAnalyzer.analyzeMood();
-            Assert.assertEquals("HAPPY", mood);
-        } catch (MoodAnalysisException e) {
+            Class<?> moodAnalyzerClass = Class.forName("com.bridgelabz.MoodAnalyzer");
+            Constructor<?> moodConstructor = moodAnalyzerClass.getConstructor();
+            Object moodObject = moodConstructor.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (MoodAnalysisException | ClassNotFoundException | NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void givenMoodAnalyzerClass_NoParameters_whenNotProper_shouldReturnObject() {
+    public void givenMoodAnalyzerClass_NoParameters_whenNotProper_shouldThrowException() {
         try {
-            MoodAnalyzer moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer();
-        } catch (MoodAnalysisException e) {
-            Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, e.exceptionType);
+            Class<?> moodAnalyzerClass = Class.forName("com.bridgelabz.MoodAnalyzerWrong");
+            Constructor<?> moodConstructor = moodAnalyzerClass.getConstructor();
+            Object moodObject = moodConstructor.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (MoodAnalysisException | ClassNotFoundException | NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
     }
 
     @Test
-    public void givenMoodAnalyzerConstructor_NoParameters_whenNotProper_shouldReturnObject() {
+    public void givenMoodAnalyzerConstructor_NoParameters_whenNotProper_shouldThrowException() {
         try {
-            MoodAnalyzer moodAnalyzer = MoodAnalyzerReflector.createMoodAnalyzer();
-        } catch (MoodAnalysisException e) {
-            Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, e.exceptionType);
+            Class<?> moodAnalyzerClass = Class.forName("com.bridgelabz.MoodAnalyzer");
+            Constructor<?> moodConstructor = moodAnalyzerClass.getConstructor(String.class);
+            Object moodObject = moodConstructor.newInstance(message);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (MoodAnalysisException | ClassNotFoundException | NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
     }
 
@@ -131,8 +156,8 @@ public class MoodAnalyzerTest {
     @Test
     public void givenMoodAnalyzer_withReflector_whenImproper_shouldThrowException() {
         try {
-            Object myObject = MoodAnalyzerReflector.createMoodAnalyzer("");
-            Object mood = MoodAnalyzerReflector.invokeMethod(myObject, "analyzeMood");
+            Object myObject = MoodAnalyzerReflector.createMoodAnalyzer("I am in Happy Mood");
+            Object mood = MoodAnalyzerReflector.invokeMethod(myObject, "analyzeMoodWrong");
             Assert.assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
             e.printStackTrace();

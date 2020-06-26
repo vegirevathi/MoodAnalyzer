@@ -19,7 +19,7 @@ public class MoodAnalyzerReflector {
                 return (MoodAnalyzer) moodObject;
             }
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new MoodAnalysisException("No such Class", MoodAnalysisException.ExceptionType.NO_SUCH_CLASS);
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -27,7 +27,7 @@ public class MoodAnalyzerReflector {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+            throw new MoodAnalysisException("No such Method", MoodAnalysisException.ExceptionType.NO_SUCH_METHOD);
         }
         return null;
     }
@@ -35,10 +35,9 @@ public class MoodAnalyzerReflector {
     public static Object invokeMethod(Object myobject, String methodName) throws MoodAnalysisException {
         try {
             return myobject.getClass().getMethod(methodName).invoke(myobject);
-        }catch (NoSuchMethodException e){
-            throw new MoodAnalysisException("No such Method",MoodAnalysisException.ExceptionType.NO_SUCH_METHOD);
-        }
-        catch (IllegalAccessException | InvocationTargetException e) {
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalysisException("No such Method", MoodAnalysisException.ExceptionType.NO_SUCH_METHOD);
+        } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
         return null;
@@ -46,17 +45,15 @@ public class MoodAnalyzerReflector {
 
     public static void setFieldValue(Object myObject, String fieldName, String fieldValue) throws MoodAnalysisException {
         try {
-            Field field=myObject.getClass().getField(fieldName);
+            Field field = myObject.getClass().getField(fieldName);
             field.setAccessible(true);
-            field.set(myObject,fieldValue);
+            field.set(myObject, fieldValue);
         } catch (NoSuchFieldException e) {
             throw new MoodAnalysisException("No such field", MoodAnalysisException.ExceptionType.NO_SUCH_FIELD);
-        }
-        catch (MoodAnalysisException e){
-            throw new MoodAnalysisException("Entered Null",MoodAnalysisException.ExceptionType.ENTERED_NULL);
-        }
-        catch (IllegalAccessException e){
-            throw new MoodAnalysisException("Not Accesible",MoodAnalysisException.ExceptionType.NO_ACCESS_GIVEN);
+        } catch (MoodAnalysisException e) {
+            throw new MoodAnalysisException("Entered Null", MoodAnalysisException.ExceptionType.ENTERED_NULL);
+        } catch (IllegalAccessException e) {
+            throw new MoodAnalysisException("Not Accesible", MoodAnalysisException.ExceptionType.NO_ACCESS_GIVEN);
         }
     }
 }

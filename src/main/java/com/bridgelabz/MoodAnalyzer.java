@@ -4,13 +4,8 @@ public class MoodAnalyzer {
 
     private String message;
 
-    public MoodAnalyzer(String message) throws MoodAnalysisException {
+    public MoodAnalyzer(String message) {
         this.message = message;
-    }
-
-    public String analyzeMood(String message) throws MoodAnalysisException {
-        this.message = message;
-        return analyzeMood();
     }
 
     public String analyzeMood() throws MoodAnalysisException {
